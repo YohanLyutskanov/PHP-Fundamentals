@@ -1,0 +1,149 @@
+insert into rental_orders (
+employee_id,
+customer_id ,
+car_id ,
+car_condition ,
+tank_level ,
+kilometrage_start ,
+kilometrage_end ,
+total_kilometrage ,
+start_date,
+end_date ,
+total_days,
+rate_applied ,
+tax_rate ,
+order_status ,
+notes
+) values (
+2,
+2,
+2,
+"Used",
+"Empty",
+400,
+4000,
+3600,
+"2020-5-15",
+"2021-5-15",
+365,
+12.3,
+12,
+"shipped",
+"Notes are to be written"
+)
+.....................................................................................
+
+create table cars (id int primary key auto_increment,
+plate_number int ,
+make varchar(30) not null,
+model varchar(30) not null,
+car_year int,
+category_id int,
+doors int,
+picture text,
+`condition`  varchar (20),
+available varchar (30)
+ )
+
+create table employees (
+id int primary key auto_increment,
+first_name text(30) not null ,
+last_nametext text (30) not null ,
+title text(30),
+notes text (400)
+)
+
+
+ create table customers (id int primary key auto_increment,
+ driver_licence_number bigint ,
+ full_name text (60) not null,
+address text (100) ,
+city text (50),
+zip_code int,
+notes text (300)
+)
+
+
+create table rental_orders (id int primary key auto_increment,
+employee_id int,
+customer_id int,
+car_id int,
+car_condition varchar (20),
+tank_level text(30),
+kilometrage_start float,
+kilometrage_end float,
+total_kilometrage float,
+start_date date,
+end_date date,
+total_days int,
+rate_applied float,
+tax_rate float,
+order_status varchar(30),
+notes text (300))
+......................................................................................................
+
+insert into cars (
+plate_number,
+ make,
+ model,
+ car_year,
+ category_id,
+ doors,
+ picture,
+ `condition`,
+ available
+) values (
+232323,
+"Audi",
+"A3",
+2015,
+1,
+5,
+null,
+"New",
+"Yes"
+)
+...............................................................................................
+insert into employees (
+ first_name ,
+ last_nametext ,
+ title ,
+ notes  ) values (
+ "Pesho",
+ "Peshev",
+ "Seller",
+ "I am peshkata"
+ )
+ ..................................................................................................
+ insert into customers (
+   driver_licence_number,
+    full_name,
+ 	address ,
+ 	city,
+ 	zip_code ,
+ 	notes ) values
+ 	(
+ 	13213132,
+ 	"Ivan Ivanov",
+ 	"Hr. Botev 123",
+ 	"Sofia",
+ 	1000,
+ 	"Vanio"
+ 	)
+............................................................................................................
+ 	insert into categories (
+      `category`,
+    	`daily_rate` ,
+    	`weekly_rate` ,
+    	`monthly_rate`,
+    	`weekend_rate`
+    	)
+    	values
+    	(
+    	"Car",
+    	12,
+    	32,
+    	12,
+    	45
+    	)
+

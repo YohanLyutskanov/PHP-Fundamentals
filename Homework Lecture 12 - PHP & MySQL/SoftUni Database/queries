@@ -1,0 +1,129 @@
+CREATE TABLE `departments` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(30) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+
+__________
+
+CREATE TABLE `addresses` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`address_text` VARCHAR(100) NOT NULL,
+	`town_id` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	INDEX `FK_addresses_towns` (`town_id`),
+	CONSTRAINT `FK_addresses_towns` FOREIGN KEY (`town_id`) REFERENCES `towns` (`id`)
+)
+
+________________
+
+CREATE TABLE `employees` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`first_name` VARCHAR(30) NOT NULL,
+	`middle_name` VARCHAR(30) NOT NULL,
+	`last_name` VARCHAR(30) NOT NULL,
+	`job_title` VARCHAR(30) NULL DEFAULT NULL,
+	`department_id` INT(11) NULL DEFAULT NULL,
+	`hire_date` DATE NULL DEFAULT NULL,
+	`salary` FLOAT NULL DEFAULT NULL,
+	`address_id` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	INDEX `FK_employees_departments` (`department_id`),
+	INDEX `FK_employees_addresses` (`address_id`),
+	CONSTRAINT `FK_employees_addresses` FOREIGN KEY (`address_id`) REFERENCES `addresses` (`id`),
+	CONSTRAINT `FK_employees_departments` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`)
+)
+
+____________________
+
+CREATE TABLE `towns` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`id`)
+)
+
+_____________________
+
+insert into towns
+(name )
+VALUES
+("Burgas")
+
+__________________________
+
+insert into departments
+(name )
+VALUES
+("Quality Assurance")
+
+___________________________
+
+insert into employees
+(first_name,
+ middle_name,
+ last_name,
+ job_title,
+ department_id,
+ hire_date,
+ salary
+ )
+VALUES
+(
+"Georgi",
+"Teziev",
+"Ivanov",
+"CEO",
+null,
+"2007/12/09",
+3000.00
+)
+______________________________
+
+//select all
+
+$sql = "select * from employees";
+
+$results = $db->query($sql, PDO::FETCH_ASSOC);
+foreach ($results as $result) {
+    print_r($result);
+_________________________________
+
+//select and order
+
+ $sql = "select * from towns order by `name`  DESC ";
+
+ $results = $db->query($sql, PDO::FETCH_ASSOC);
+
+ foreach ($results as $result) {
+     print_r($result);
+ }
+
+ _______________________________________________
+
+//select, and order some columns
+
+$sql = "select first_name, last_name, job_title, salary from employees order by salary DESC ";
+
+$results = $db->query($sql, PDO::FETCH_ASSOC);
+
+foreach ($results as $result) {
+    echo "<pre>";
+    print_r($result);
+    echo "</pre>";
+
+}
+____________________________________________________
+
+//increase salary with 10%
+
+$sql = "update employees set salary = (salary *1.1)";
+
+$results = $db->query($sql, PDO::FETCH_ASSOC);
+
+foreach ($results as $result) {
+    echo "<pre>";
+    print_r($result);
+    echo "</pre>";
+
+}
+_________________________________________________________
